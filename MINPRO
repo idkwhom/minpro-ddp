@@ -1,0 +1,87 @@
+# Perpus Digital Santai
+
+buku_list = [
+    ("Putri Tidur", "Eci", 2022),
+    ("Just a freind", "kal", 2025),
+    ("Hanya hts kmu", "gtw siapa",2021)
+]  # simpen daftar buku
+
+def nambah():
+    print("\n>>> Tambah Buku <<<")
+    judul = input("Judul buku: ")
+    penulis = input("Penulis: ")
+    tahun = input("Tahun: ")
+
+    buku_list.append((judul, penulis, tahun))
+    print(f"Buku '{judul}' udah masuk koleksi.\n")
+
+def liat():
+    print("\n>>> Koleksi Buku <<<")
+    if len(buku_list) == 0:
+        print("Belum ada buku sama sekali.\n")
+    else:
+        for idx, b in enumerate(buku_list, 1):
+            print(f"{idx}. {b[0]} - {b[1]} ({b[2]})")
+        print()
+
+def ubah():
+    liat()
+    if not buku_list:
+        return
+    try:
+        no = int(input("Nomor buku yang mau diubah: ")) - 1
+        if no < 0 or no >= len(buku_list):
+            print("Nomor nggak valid.\n")
+            return
+
+        judul = input("Judul baru (enter = skip): ")
+        penulis = input("Penulis baru (enter = skip): ")
+        tahun = input("Tahun baru (enter = skip): ")
+
+        lama = buku_list[no]
+        baru = (
+            judul if judul else lama[0],
+            penulis if penulis else lama[1],
+            tahun if tahun else lama[2]
+        )
+        buku_list[no] = baru
+        print("Data buku udah diganti.\n")
+    except:
+        print("Input salah, harus angka.\n")
+
+def hapus():
+    liat()
+    if not buku_list:
+        return
+    try:
+        no = int(input("Nomor buku yang mau dihapus: ")) - 1
+        if no < 0 or no >= len(buku_list):
+            print("Nomor nggak valid.\n")
+            return
+        hapus = buku_list.pop(no)
+        print(f"Buku '{hapus[0]}' berhasil dihapus.\n")
+    except:
+        print("Input salah, bro.\n")
+
+def menu():
+    while True:
+        print("==== PERPUS DIGITAL ====")
+        print("1. Tambah")
+        print("2. Liat Koleksi")
+        print("3. Ubah Data")
+        print("4. Hapus Buku")
+        print("5. Keluar")
+        pilih = input("Pilih menu (1-5): ")
+
+        if pilih == "1": nambah()
+        elif pilih == "2": liat()
+        elif pilih == "3": ubah()
+        elif pilih == "4": hapus()
+        elif pilih == "5":
+            print("Thanks, udah mampir ke perpus digital!\n")
+            break
+        else:
+            print("Pilihan nggak ada.\n")
+
+menu()
+
